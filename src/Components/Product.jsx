@@ -1,17 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Cards from './Cards'
+import { getProductsThunk } from '../store/productSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Product = () => {
-    const [product, setProduct] = useState([])
+    const dispatch = useDispatch()
+    const { data: product } = useSelector(state => state.products)
+
+    console.log("product", product)
 
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products').then(data=>data.json()).then(result => setProduct(result))
-    }, [])
+        dispatch(getProductsThunk());
+    }, [dispatch])
 
     return (
         <>
-            <p>Product</p>
-            <Cards img={product[0]?.image}/>
+            <div className='grid grid-cols-4 gap-2'>
+                {
+                    product[0]?.map((item, id) => (
+                        <Cards product={item} key={id} img={item.image} price={item.price} title={item.title} />
+                    ))
+                }
+
+            </div>
         </>
     )
 }

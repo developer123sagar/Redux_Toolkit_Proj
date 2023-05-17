@@ -1,27 +1,23 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { add } from '../store/cartSlice'
 
-const Cards = ({img}) =>{
+
+const Cards = ({ img, title, price, product }) => {
+  const dispatch = useDispatch()
+
+  const addtoCart = (product) => {
+    dispatch(add(product))
+  }
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <img src={img} className='h-44 w-full object-contain hover:scale-[1.05]' alt="clothing" />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
+    <div className='shadow p-3'>
+      <img src={img} className=' w-[200px] h-[200px] mx-auto mb-1 object-contain hover:scale-[1.05]' alt="/" />
+      <div className='flex items-center justify-center flex-col'>
+        <p className='truncate w-full text-center'>{title}</p>
+        <p>Rs.{price}</p>
+        <Button variant="contained" onClick={() => addtoCart(product)} >Add to cart</Button>
+      </div>
+    </div>
   );
 }
 
