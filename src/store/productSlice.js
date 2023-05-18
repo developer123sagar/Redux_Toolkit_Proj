@@ -2,15 +2,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],
+  filteredDesc: [],
+  filteredAsc: [],
   isLoading: true,
+  isDescending: false,
+  isAscending: false,
 };
 export const getProductsThunk = createAsyncThunk(
   "getProductsThunk",
   async function getProducts() {
-    const data = await fetch("https://fakestoreapi.com/products").then(
-      (result) => result.json()
-    );
-    console.log('my API DATA', data)
+    const data = await fetch("https://fakestoreapi.com/products").then((result) => result.json());
     return data;
   }
 );
@@ -18,7 +19,18 @@ export const getProductsThunk = createAsyncThunk(
 const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    sortProductsDescending(state, action) {
+      state.filteredDesc = action.payload;
+      state.isDescending = true;
+      state.isAscending = false;
+    },
+    sortProductsAscending(state, action) {
+      state.filteredAsc = action.payload;
+      state.isDescending = false;
+      state.isAscending = true;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProductsThunk.pending, (state) => {
@@ -26,7 +38,6 @@ const productSlice = createSlice({
       })
       .addCase(getProductsThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log("action.payload",action.payload)
         state.data.push(action.payload);
       })
       .addCase(getProductsThunk.rejected, (state) => {
@@ -35,4 +46,6 @@ const productSlice = createSlice({
   },
 });
 
+export const { sortProductsDescending, sortProductsAscending } =
+  productSlice.actions;
 export default productSlice.reducer;

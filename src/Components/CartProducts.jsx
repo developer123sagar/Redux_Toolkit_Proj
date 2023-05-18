@@ -13,8 +13,7 @@ const CartProducts = () => {
     }
     return (
         <>
-            <p className='text-3xl text-lime-500'>Cart products</p>
-
+            <p className='text-3xl text-lime-500 mt-20'>Cart products</p>
             {
                 products?.map((item, id) => (
                     <div key={id} className='shadow p-3'>
