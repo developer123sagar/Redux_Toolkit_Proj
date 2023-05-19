@@ -1,4 +1,4 @@
-import { Button, Skeleton } from '@mui/material';
+import { Button, Skeleton} from "@mui/material"
 import { useDispatch } from 'react-redux';
 import { add } from '../store/cartSlice'
 

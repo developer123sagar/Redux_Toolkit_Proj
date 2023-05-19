@@ -2,6 +2,8 @@ import { Button } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { remove } from '../store/cartSlice'
+import SeoHelmet from '../Helmet/SeoHelmet'
+import seoInfo from "../helmet.json"
 
 const CartProducts = () => {
     const productItems = useSelector(state => state.cart)
@@ -13,6 +15,11 @@ const CartProducts = () => {
     }
     return (
         <>
+            <SeoHelmet
+            title={seoInfo[1].title}
+            content={seoInfo[1].content}
+            href="/cartproduct" 
+            />
             <p className='text-3xl text-lime-500 mt-20'>Cart products</p>
             {
                 products?.map((item, id) => (

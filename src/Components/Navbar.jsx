@@ -38,6 +38,8 @@ function Navbar() {
   const handleProdDesc = (products) =>
     dispatch(sortProductsDescending(products));
   const handleProdAsc = (products) => dispatch(sortProductsAscending(products));
+
+
   return (
     <div className="fixed top-0 z-10 w-full">
       <AppBar>
@@ -98,7 +100,7 @@ function Navbar() {
 
           <Link to="/cartproduct">
             <Button color="inherit">
-              My Cart
+              Cart
               <Badge
                 className="p-2"
                 badgeContent={cartProdLength}
