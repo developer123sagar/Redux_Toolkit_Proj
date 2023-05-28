@@ -55,7 +55,7 @@ function Navbar() {
           </IconButton>
           <Typography component="p" sx={{ flexGrow: 1 }}>
             <Link to="/">
-              Swift<span className="text-xl text-red-400">buy</span>
+              Swift<span className="text-xl text-green-400">buy</span>
             </Link>
           </Typography>
 
